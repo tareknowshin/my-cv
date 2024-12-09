@@ -1,0 +1,167 @@
+
+\documentclass[11pt]{article} % Choose the document class and font size
+\usepackage[margin=1in]{geometry} % Page layout settings
+
+\usepackage{graphicx}
+
+\usepackage{titlesec}
+\usepackage{enumitem} % If you're using lists
+
+% Section spacing
+\titlespacing*{\section}
+{0pt}{12pt}{6pt}
+
+\titlespacing*{\subsection}
+{0pt}{10pt}{4pt}
+
+% List spacing
+\setlist[itemize]{itemsep=6pt, topsep=12pt}
+
+% Set the citation style
+\usepackage[
+    backend=biber,   
+    maxnames=20,      
+    style=nature,       
+    sorting=ydnt,      
+    defernumbers=true,
+    maxcitenames=99, 
+    mincitenames=1
+]{biblatex}
+\addbibresource{ref.bib} % Adds the bibliography resource file 'ref.bib' containing all the references.
+
+% Allows columns that stretch across pages
+\usepackage{longtable}
+
+% Table functionality and beautification (not strictly needed)
+\usepackage{bookmark}
+
+% Use icons, if you want.
+% All available icons: http://mirrors.ibiblio.org/CTAN/fonts/fontawesome5/doc/fontawesome5.pdf
+\usepackage{fontawesome}
+
+% Allows font justification control (needed for clean pub-list formatting)
+\usepackage{ragged2e}
+
+% For underlining with line breaks
+\usepackage{soul} 
+
+% All fonts: https://tug.org/FontCatalogue/
+\usepackage{kpfonts} % More professional font
+% \usepackage[default]{sourcecodepro} % Code-like font
+\usepackage[T1]{fontenc}
+
+% Control hyperlinks and colors
+% CUSTOM COLORS INCLUDED DIRECTLY AFTER \begin{document}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,        % Enable colored links
+    breaklinks=true,        % Allow links to break across lines
+    linkcolor=cornflowerblue,    % Color of internal links
+    urlcolor=cornflowerblue,     % Color of URL links
+    anchorcolor=cornflowerblue,  % Color of anchors
+    citecolor=cornflowerblue,    % Color of citations
+    pdftitle={Your Title},    % Title of the PDF
+    pdfauthor={Your Name}, % Author of the PDF
+    bookmarksopen=true,      % Open bookmarks panel at start
+}
+
+%%% CONVENIENCE FUNCTIONS GO HERE %%%
+%%% ----------------------------- %%%
+\newcommand{\mytitle}[4]{
+  \begin{center}
+    \Huge\textbf{Md. Tarek Hasan}\normalsize \\ % Name in large bold font
+    \href{mailto:tarekms_nft@just.edu.bd}{tarekms\_nft@just.edu.bd}
+    $\ \diamond\ $
+  \href{https://github.com/tareknowshin}{GitHub}
+  \end{center}
+}
+%%% ----------------------------- %%%
+
+
+\begin{document}
+\include{colors.tex} % Load custom colors from colors file
+\mytitle{Your Name}{person@gmail.com}{yourwebsite.com}{Your Address\\Goes here\\This field can be excluded} % Insert your custom title
+
+
+% Ensure right side margin is not surpassed by bibliography and the right margin is aligned throughout
+\RaggedRight
+
+% These \pdfbookmark lines create bookmarks in the exported PDF document that display in the left pane.
+% Value in [] sets the indentation level of the bookmark
+\pdfbookmark[1]{Education}{}
+\section*{Education}
+\input{education.tex}
+
+\pdfbookmark[1]{Independent Learning}{independent_study}
+\section*{Independent Learning}
+\label{independent_study}
+\input{independent_study.tex}
+
+\pdfbookmark[1]{Research Interests}{research_interest}
+\section*{Research Interests}
+\label{research_interest}
+\input{research_interest.tex}
+
+
+\pdfbookmark[1]{Research Experience}{exp_research}
+\section*{Research Experience}
+\label{exp_research}
+\input{exp_research.tex}
+
+
+\pdfbookmark[1]{Publications}{pubs}
+\section*{Publications}
+\label{pubs}
+
+% Add equal contribution dagger
+\vspace{-.75em}
+\small
+\faGoogle~\href{https://scholar.google.com/citations?user=6kRtk-IAAAAJ&hl=en}{Google Scholar}\\
+\normalsize
+
+\pdfbookmark[2]{Journal Articles}{journal-article}
+\subsection*{Journal Articles}
+\label{journal-article}
+\newrefcontext[labelprefix=J] % Will prefix bibliography numbers with this letter
+% Ensures publications which are not cited in the document are included in the above sections
+\nocite{*} % Ensures uncited items are included
+\printbibliography[
+    type=article, % Only include @article ref.bib items
+    heading=none, % Do not include header. Gives us more control.
+    resetnumbers=true, % Start item counter from zero
+    keyword=J % Include items in ref.bib with keyword={J}
+]
+
+\pdfbookmark[2]{Conference Paper}{conferences}
+\subsection*{Conference Paper}
+\label{conferences}
+\newrefcontext[labelprefix=C]
+\printbibliography[type=inproceedings,heading=none,resetnumbers=true,keyword=C]
+
+\pdfbookmark[1]{Research Skills}{research_skills}
+\section*{Research Skills}
+\label{research_skills}
+\input{research_skills.tex}
+    
+\pdfbookmark[1]{Technical Skills}{technical_skills}
+\section*{Technical Skills}
+\label{technical_skills}
+\input{technical_skills.tex}
+
+\pdfbookmark[1]{Membership}{memberships}
+\section*{Membership}
+\label{memberships}
+\input{memberships.tex}
+
+\pdfbookmark[1]{Extracurricular Activities}{extracurricular}
+\section*{Extracurricular Activities}
+\label{extracurricular}
+\input{extracurricular.tex}
+
+\pdfbookmark[1]{References}{references}
+\section*{References}
+\label{references}
+\input{references.tex}
+
+\end{document}
